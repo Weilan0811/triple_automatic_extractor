@@ -14,7 +14,7 @@ from llms.remote import RemoteLLMs
 
 def read_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config_path", type=str, default="configs/wsx_gpt35.json")
+    parser.add_argument("--config_path", type=str, default="configs/gpt35.json")
     args = parser.parse_args()
     return args
 

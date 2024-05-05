@@ -95,7 +95,7 @@ class CheckingUtils:
 #     # 声明参数
 #     parser = argparse.ArgumentParser()
 #     parser.add_argument("--model", type=str, default="gpt")
-#     parser.add_argument("--config_path", type=str, default="./llms/remote/configs/wsx_gpt35.json")
+#     parser.add_argument("--config_path", type=str, default="./llms/remote/configs/gpt35.json")
 #     parser.add_argument("--input_path", type=str, default="./dataset/origin.json")
 #     parser.add_argument("--output_path", type=str, default="./result/result.json")
 #     parser.add_argument("--save_path", type=str, default="./result/save.pkl")

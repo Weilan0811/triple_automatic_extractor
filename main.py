@@ -7,7 +7,7 @@ if __name__ == '__main__':
     # 声明参数
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", type=str, default="gpt", help="调用模型名称（gpt or lamma）")
-    parser.add_argument("--config_path", type=str, default="./llms/remote/configs/wsx_gpt35.json", help="配置文件路径")
+    parser.add_argument("--config_path", type=str, default="./llms/remote/configs/gpt35.json", help="配置文件路径")
     parser.add_argument("--input_path", type=str, default="./dataset/origin.json", help="待处理数据集路径")
     parser.add_argument("--output_path", type=str, default="./result/result.json", help="保存数据保存路径")
     parser.add_argument("--save_path", type=str, default="./result", help="自动保存路径")

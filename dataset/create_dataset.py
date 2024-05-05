@@ -40,7 +40,7 @@ except FileNotFoundError:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config_path", type=str, default="../llms/remote/configs/wsx_gpt35.json")
+    parser.add_argument("--config_path", type=str, default="../llms/remote/configs/gpt35.json")
     parser.add_argument("--prompt_language", type=str, default="en")
     args = parser.parse_args()
 

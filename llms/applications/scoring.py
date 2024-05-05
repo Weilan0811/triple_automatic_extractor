@@ -236,7 +236,7 @@ if __name__ == '__main__':
     # https://platform.openai.com/docs/api-reference
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config_path", type=str, default="../remote/configs/wsx_gpt35.json")
+    parser.add_argument("--config_path", type=str, default="../remote/configs/gpt35.json")
     parser.add_argument("--prompt_language", type=str, default="zh")
     args = parser.parse_args()
 
