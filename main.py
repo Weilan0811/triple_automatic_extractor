@@ -14,6 +14,7 @@ if __name__ == '__main__':
     parser.add_argument("--log_path", type=str, default="./logs/temp.log", help="日志保存路径")
     parser.add_argument("--prompt", type=str, default="full", help="使用的prompt类型")
     parser.add_argument("--prompt_language", type=str, default="en", help="使用的prompt语言")
+    parser.add_argument("--retries", type=int, default=3, help="当模型返回异常时的重复次数")
     parser.add_argument("--thread_num", type=int, default=1, help="进程数")
     parser.add_argument("--auto_save_round", type=int, default=5, help="自动保存程序运行状态的轮数")
     parser.add_argument("--save_file", action="store_true", help="保存文件状态时是否需要保存文件")

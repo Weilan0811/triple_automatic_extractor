@@ -31,7 +31,18 @@ class CheckingUtils:
             for i, sentence in enumerate(sentences):
                 if self.index[start + i] == 1:
                     continue
-                tri = send_request(self.args, self.logger, sentence['sentence'])
+                # 重试机制
+                cnt = 0
+                tri = []
+                while cnt <= self.args.retries:
+                    tri = send_request(self.args, self.logger, sentence['sentence'], retry=cnt)
+                    cnt += 1
+                    if len(tri) != 0:
+                        break
+                    elif cnt <= self.args.retries:
+                        self.logger.info("Empty reply! Start retries {}".format(cnt))
+                    else:
+                        self.logger.info("Empty reply! return Empty".format(cnt))
                 try:
                     self.result[start + i]['triples'] = tri
                 except Exception as e:
@@ -81,7 +92,7 @@ class CheckingUtils:
                     t = threading.Thread(target=self.worker, args=(data_list[i], spliter * i), name=f"Thread-{i + 1}")
                     thread_pool.append(t)
                     t.start()
-                for i in range(args.thread_num):
+                for i in range(self.args.thread_num):
                     thread_pool[i].join()
             except KeyboardInterrupt:
                 self.save_state()

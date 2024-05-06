@@ -55,7 +55,7 @@ class ScoringAgent:
             "{{Output}}": self.output
         }
 
-    def judge_a_case(self, case_data: dict, mod=1):
+    def judge_a_case(self, case_data: dict, mod=1, retry=0):
         """
         输入内容，应用prompt模板获取输出
 
@@ -66,7 +66,7 @@ class ScoringAgent:
         prompt = self.llm_model.fit_case(pattern=self.prompt_pattern, data=case_data, meta_dict=self.para)
         # self.logger.info(f"prompt: {prompt}")
         contexts = self.llm_model.create_prompt(prompt)
-        result = self.llm_model.request_llm(contexts)
+        result = self.llm_model.request_llm(contexts, repeat_times=retry)
         if mod == 1:
             result = self.extract_scores(result[-1]["content"])
         else:
@@ -129,7 +129,7 @@ class ScoringAgent:
             return origin
 
 
-def send_request(args, logger, sentence):
+def send_request(args, logger, sentence, retry=0):
     # 定义一个Agent
     if args.model == "gpt":
         chat_gpt = ChatGPTLLM(args.config_path)
@@ -228,7 +228,7 @@ def send_request(args, logger, sentence):
             prompt = TEXT_EVAL_GENERAL_PROMPT_PATTERN_CHINESE
     sc = ScoringAgent(logger, chat_gpt, task_name, prompt,
                       language, task_definition, guidance, steps, examples, relations, output)
-    triples = sc.judge_a_case(case_data)
+    triples = sc.judge_a_case(case_data, retry=retry)
     return triples
 
 

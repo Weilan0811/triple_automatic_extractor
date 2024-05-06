@@ -44,8 +44,9 @@ python main.py --input_path "./dataset/origin.json" --thread_num 3 --save_file
 *   log\_path: 程序运行日志保存路径；
 *   prompt: 所使用的prompt类型，可选项为"simple", "medium"和"full"，远程大模型推荐使用full，本地大模型推荐使用simple；
 *   prompt\_language: 所使用的prompt语言，可选项为"en"和"zh"
-*   thread\_num: 并发抽取的线程数，线程数越高速度越快，但程序的不稳定性也会提高
-*   auto\_save\_round: 每个线程在抽取若干条数据后进行自动保存
+*   retries: 抽取异常时最大重试次数，默认为3次
+*   thread\_num: 并发抽取的进程数，进程数越高速度越快，但程序的不稳定性也会提高，默认为1即不使用多进程
+*   auto\_save\_round: 每个线程在抽取若干条数据后进行自动保存，数值越高程序越稳定，但程序效率越低，默认为5
 *   save\_file: 是否需要在自动保存程序状态时保存输出文件
 
 ## **附：Llama本地部署指南**
