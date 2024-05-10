@@ -32,7 +32,7 @@ Your output should strictly follow this format and can be directly decoded by Py
     "{{TGT}}": {{TGT_VALUE}}
 }
 '''
- 
+
 """
 
 TEXT_EVAL_GENERAL_PROMPT_PATTERN_CHINESE = """
@@ -99,7 +99,7 @@ PROMPT_SIMPLE = """
 """
 
 PROMPT_SIMPLEST = """
-请以("实体", "关系", "实体")的格式从下列句子中抽取常识知识三元组：{{TGT_VALUE}}
+请把："{{TGT_VALUE}}"这句话抽取出一个形如："{(),(),()}" 的json字符串，其中括号里的内容是抽取出的对应好的"实体1", "关系", "实体2"三元组构成的json字符串。你只用给我输出要求的"{(),(),()}"，除此之外都不要输出任何解释性语句。
 """
 
 DATA_GENERATE_PROMPT = """
@@ -108,7 +108,7 @@ Here is a point-wise {{TASK_NAME}} task. All [Input] are in {{Language}}.
 Your are required to acted as a professional native-speaker human annotator to evaluate the given {{TGT}} in [Input].
 {{MORE_TASK_DEFINITION}}
 Your evaluation should follow the [Step] and [Guidance]. 
-The output format should follow the [Output Format].
+The output format should follow the [Outut Format].
 
 [Step]
 {{STEPS}}
