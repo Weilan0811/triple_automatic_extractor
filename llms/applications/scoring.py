@@ -10,11 +10,12 @@ from llms.remote.MyLlama2 import LocalLlama
 
 
 class ScoringAgent:
-    def __init__(self, log, llm_model: RemoteLLMs, task_name: str, prompt_pattern: str,
+    def __init__(self, args, log, llm_model: RemoteLLMs, task_name: str, prompt_pattern: str,
                  language: str, task_definition: str, guidance: list,
                  steps: list, examples: list, relations: dict, output: dict):
         """
 
+        :param args: 参数信息
         :param log: 输出log文件
         :param llm_model: 给定一个RemoteLLMs的实例化对象
         :param task_name: 任务名称
@@ -26,6 +27,7 @@ class ScoringAgent:
         :param examples: 任务实例
         :param output: 任务输出
         """
+        self.args = args
         self.logger = log
         self.llm_model = llm_model
         self.prompt_pattern = prompt_pattern
@@ -79,8 +81,9 @@ class ScoringAgent:
 
         :param last_response: 大模型返回的原始输出
         """
-        check_prompt = self.llm_model.create_prompt(CHECK_PROMPT.replace("{{TGT_VALUE}}", last_response))
-        last_response = self.llm_model.request_llm(check_prompt)[-1]['content']
+        if self.args.model == "gpt":
+            check_prompt = self.llm_model.create_prompt(CHECK_PROMPT.replace("{{TGT_VALUE}}", last_response))
+            last_response = self.llm_model.request_llm(check_prompt)[-1]['content']
         origin = last_response.strip(" \t\n'[Output][输出]`").strip(" \t\n'[Output][输出]`")
         # origin = origin.replace('\n', '').replace('\t', '').replace(' ', '')
         try:
@@ -107,9 +110,9 @@ class ScoringAgent:
                     self.logger.info(f"triples: {dictionary['triples']}")
                     return dictionary['triples']
                 except json.decoder.JSONDecodeError:
-                    return origin
+                    return []
         except KeyError:
-            return origin
+            return []
 
     def extract_scores2(self, last_response: str):
         """
@@ -226,7 +229,7 @@ def send_request(args, logger, sentence, retry=0):
             prompt = TEXT_EVAL_GENERAL_PROMPT_PATTERN
         else:
             prompt = TEXT_EVAL_GENERAL_PROMPT_PATTERN_CHINESE
-    sc = ScoringAgent(logger, chat_gpt, task_name, prompt,
+    sc = ScoringAgent(args, logger, chat_gpt, task_name, prompt,
                       language, task_definition, guidance, steps, examples, relations, output)
     triples = sc.judge_a_case(case_data, retry=retry)
     return triples

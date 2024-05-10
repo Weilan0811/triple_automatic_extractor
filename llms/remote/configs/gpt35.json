@@ -1,6 +1,6 @@
 {
   "model": "gpt-3.5-turbo-0125",
-  "api_key": "sk-BpYJcXHJZTMtim1jA8K2vhlD9AWfn4dLf6o1Xe9CFtNnNU3w",
-  "base_url": "https://api.chatanywhere.tech/v1",
+  "api_key": "******",
+  "base_url": "******",
   "seed": 23333
 }
