@@ -36,7 +36,7 @@ python main.py --input_path "./dataset/origin.json" --thread_num 3 --save_file
 
 ## **运行命令参数说明**
 
-*   model: 指定使用的模型，可选项为"gpt"和"lamma"；
+*   model: 指定使用的模型，可选项为"gpt"和"llama"；
 *   config\_path: 远程大模型的配置文件所在位置，需要提供大模型API的cdkey等信息；
 *   input\_path: 输入数据集存放位置；
 *   output\_path: 提取三元组后的文件保存地址；
